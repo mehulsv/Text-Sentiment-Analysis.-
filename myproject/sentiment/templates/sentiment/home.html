@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sentiment/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Sentiment Analysis App</h1>
+        <p>Analyze the sentiment of your text using VADER or TextBlob.</p>
+        <a href="{% url 'index' %}" class="button">Go to Sentiment Analysis</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analysis</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sentiment/styles.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="text" rows="4" cols="50" placeholder="Enter text here..."></textarea><br>
+            <label for="model">Choose a model:</label>
+            <select name="model">
+                <option value="vader" {% if model == "vader" %}selected{% endif %}>VADER</option>
+                <option value="textblob" {% if model == "textblob" %}selected{% endif %}>TextBlob</option>
+            </select><br>
+            <button type="submit">Analyze</button>
+        </form>
+        {% if sentiment %}
+            <h2>Sentiment Analysis Result:</h2>
+            <canvas id="sentimentChart"></canvas>
+            <script>
+                var ctx = document.getElementById('sentimentChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Positive', 'Neutral', 'Negative', 'Compound'],
+                        datasets: [{
+                            label: 'Sentiment Scores',
+                            data: [{{ sentiment.pos }}, {{ sentiment.neu }}, {{ sentiment.neg }}, {{ sentiment.compound }}],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(192, 192, 192, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 206, 86, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(192, 192, 192, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
+        {% endif %}
+    </div>
+</body>
+</html>
