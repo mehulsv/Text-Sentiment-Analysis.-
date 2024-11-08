@@ -1,56 +1,45 @@
-Airfare Prediction Project
-Overview
-This project is focused on predicting airfare prices using various machine learning techniques within a Django framework. The prediction model integrates a scoring system that evaluates speech recognition, pronunciation, and clarity, enhancing the user experience.
+# Text Sentiment Analysis
 
-Project Structure
-db.sqlite3: The SQLite database file storing all project-related data, including models and predictions.
-manage.py: A command-line utility that lets you interact with this Django project in various ways (e.g., running the development server, migrating the database, etc.).
-setup_nltk.py: A Python script for setting up and installing necessary NLTK (Natural Language Toolkit) resources required for the project.
-Getting Started
-Prerequisites
-Python 3.x
-Django
-NLTK
-SQLite
-Installation
-Clone the repository:
+## Overview
+This project performs sentiment analysis on text data, identifying if the sentiment expressed is positive, negative, or neutral. This application uses Natural Language Processing (NLP) techniques to classify text and provides insights into the emotions conveyed in the input.
 
-bash
-Copy code
-git clone <repository_url>
-cd <repository_directory>
-Set up the environment:
+## Features
+- **Sentiment Classification**: Classifies text as positive, negative, or neutral.
+- **Score Analysis**: Provides a sentiment score (if applicable) to indicate intensity.
+- **Data Processing**: Cleans and processes text data to improve accuracy.
+- **Batch Processing**: Allows analyzing multiple text entries at once.
 
-bash
-Copy code
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-Install dependencies:
+## Requirements
+- **Python 3.8+**
+- Required packages listed in `requirements.txt`:
+    ```bash
+    pip install -r requirements.txt
+    ```
+  Common packages include:
+  - `nltk` (Natural Language Toolkit)
+  - `scikit-learn`
+  - `pandas`
+  - `numpy`
 
-bash
-Copy code
-pip install -r requirements.txt
-Run NLTK setup:
+## Setup
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/text-sentiment-analysis.git
+    cd text-sentiment-analysis
+    ```
 
-bash
-Copy code
-python setup_nltk.py
-Apply migrations:
+2. Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-bash
-Copy code
-python manage.py migrate
-Run the development server:
+3. Download necessary NLTK data (if using NLTK for text processing):
+    ```python
+    import nltk
+    nltk.download('vader_lexicon')
+    ```
 
-bash
-Copy code
-python manage.py runserver
-Usage
-Access the application via http://127.0.0.1:8000/.
-Use the application interface to interact with the airfare prediction model.
-Scoring System
-The application includes a custom scoring system that evaluates:
-
-Recognition: Accuracy of speech recognition.
-Pronunciation: Comparison of pronunciation with standard models.
-Clarity: Clarity of enunciation.
+## Usage
+Run the main script to analyze sample text:
+```bash
+python sentiment_analysis.py --text "Your input text here"
